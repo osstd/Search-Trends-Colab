@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="static/icon.png" type="image/x-icon" />
+    <title>Google Search Dataset</title>
+
+    <link rel="stylesheet" href="static/css/require.css" />
+
+    <!-- Include Plotly JS library -->
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="main-heading">
+        <h1>Google Search Trends</h1>
+      </div>
+      <div class="text-container">
+        <h2>Introduction</h2>
+        <p>
+          Google Trends gives us an estimate of search volume. Let's explore if
+          search popularity relates to other kinds of data. Perhaps there are
+          patterns in Google's search volume and the price of Bitcoin or a hot
+          stock like Tesla. Perhaps search volume for the term "Unemployment
+          Benefits" can tell us something about the actual unemployment rate?
+          Data Sources:
+        </p>
+        <ul>
+          <li>
+            <a href="https://fred.stlouisfed.org/series/UNRATE/"
+              >Unemployment Rate from FRED</a
+            >
+          </li>
+          <li>
+            <a href="https://trends.google.com/trends/explore">Google Trends</a>
+          </li>
+          <li>
+            <a href="https://finance.yahoo.com/quote/TSLA/history?p=TSLA"
+              >Yahoo Finance for Tesla Stock Price</a
+            >
+          </li>
+          <li>
+            <a href="https://finance.yahoo.com/quote/BTC-USD/history?p=BTC-USD"
+              >Yahoo Finance for Bitcoin Stock Price</a
+            >
+          </li>
+        </ul>
+      </div>
+
+      <div class="text-container">
+        <h2>Data Manipulation</h2>
+        <p>
+          To begin, we will read in the dataset from a .csv file into a Pandas
+          dataframe. We will then inspect the first and last few rows of the
+          data to get a sense of its structure and content. Next, we will
+          examine the dimensions of the dataframe, including the number of rows
+          and columns, and count the number of entries in each column. We will
+          also examine the shape of the dataframes. Finally, we will reformat
+          the date column to make it more readable.
+        </p>
+        <ul>
+          <li>Read in the dataset from a .csv file</li>
+          <li>Inspect the first and last few rows of the data</li>
+          <li>Examine the dimensions of the dataframe</li>
+          <li>Count the number of entries in each column</li>
+          <li>
+            Complete the f-string to show the largest/smallest number in the
+            search data column
+          </li>
+          <li>
+            Try the <code>.describe()</code> function to see some useful
+            descriptive statistics
+          </li>
+          <li>
+            What is the periodicity of the time series data (daily, weekly,
+            monthly)?
+          </li>
+          <li>
+            Plot the Tesla stock price against the Tesla search volume using a
+            line chart and two different axes
+          </li>
+        </ul>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-grid">
+          <div class="chart" id="chart1"></div>
+          <span class="label">Figure 1</span>
+        </div>
+      </div>
+
+      <div class="text-container">
+        <h2>Bitcoin (BTC) Price v.s. Search Volume</h2>
+        <p>
+          Using Pandas <code>.resample()</code>, BTC price daily series is
+          converted to monthly frequency and is comparable to BTC search monthly
+          series. After matching the time series, plot BTC Price v.s. Search
+          Volume.
+        </p>
+        <p>
+          The spike in Bitcoin price in 2017, reaching an all-time high of
+          nearly $20,000, was accompanied by a surge in Google search interest,
+          indicating a strong correlation between market enthusiasm and
+          mainstream attention. The subsequent crash in 2018, where the price
+          dropped by over 70%, was similarly mirrored by a decline in search
+          interest, highlighting the volatile and speculative nature of the
+          cryptocurrency market.
+        </p>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-grid">
+          <div class="chart" id="chart2"></div>
+          <span class="label">Figure 2</span>
+        </div>
+      </div>
+
+      <div class="text-container">
+        <h2>
+          Unemployement Benefits Search vs. Actual Unemployment in the U.S.
+        </h2>
+        <p>
+          Unemployment claims in the US tend to spike during the winter months
+          (December to February) and decline during the summer months (June to
+          August), with a noticeable peak in initial jobless claims around
+          January. This seasonal pattern is largely driven by industries such as
+          construction, tourism, and education, which experience fluctuations in
+          employment due to weather and academic cycles.
+        </p>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-grid">
+          <div class="chart" id="chart3"></div>
+          <span class="label">Figure 3</span>
+        </div>
+      </div>
+
+      <div class="text-container">
+        <h2>Smoothing out Time Series Data</h2>
+        <p>
+          Historical data suggests that search trends for unemployment benefits
+          often precede official changes in the unemployment rate. This is
+          because individuals who are experiencing job loss or uncertainty tend
+          to search for information on unemployment benefits before the official
+          statistics are released. In fact, research has shown that Google
+          search data can be used as a leading indicator of unemployment claims,
+          with search volume often increasing before official unemployment rates
+          rise. This is because search data can capture real-time sentiment and
+          concerns of individuals, providing an early warning signal of labor
+          market stress.
+        </p>
+        <p>Time series using a mean every 6 months.</p>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-grid">
+          <div class="chart" id="chart4"></div>
+          <span class="label">Figure 4</span>
+        </div>
+      </div>
+
+      <div class="text-container">
+        <h2>Smoothing out Time Series Data</h2>
+        <p>
+          Unemployment claims in the US skyrocketed in March 2020, reaching a
+          record high of 6.9 million initial claims, as the COVID-19 pandemic
+          led to widespread lockdowns, business closures, and unprecedented job
+          losses across various industries. This spike was largely driven by the
+          sudden and drastic measures taken to contain the pandemic, which
+          resulted in a sharp contraction in economic activity and a massive
+          displacement of workers. Notably, while Google searches for
+          unemployment benefits often precede official rate increases, the 2008
+          economic crisis saw a sharp jump in the official unemployment rate to
+          10% in a short time, exceeding any increase in Google searches. This
+          highlights the severity of the crisis and the limits of using search
+          data as a leading indicator.
+        </p>
+      </div>
+
+      <div class="chart-container">
+        <div class="chart-grid">
+          <div class="chart" id="chart5"></div>
+          <span class="label">Figure 5</span>
+        </div>
+      </div>
+    </div>
+
+    <script src="static/js/require.js"></script>
+  </body>
+</html>
